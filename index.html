@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Заказ кейтеринга</title>
+    <title>Catering order</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Форма заказа кейтеринга</h2>
+    <h2>Catering order</h2>
     <form id="orderForm">
-        <label for="name">Имя:</label>
+        <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br>
 
-        <label for="phone">Телефон:</label>
+        <label for="phone">Phone:</label>
         <input type="tel" id="phone" name="phone" required><br>
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
 
-        <label for="date">Дата мероприятия:</label>
+        <label for="date">Date:</label>
         <input type="date" id="date" name="date" required><br>
 
-        <label for="time">Время мероприятия:</label>
+        <label for="time">Time:</label>
         <input type="time" id="time" name="time" required><br>
 
-        <label for="people">Количество человек:</label>
+        <label for="people">People quantity:</label>
         <input type="number" id="people" name="people" min="1" required><br>
 
-        <label for="set">Выберите набор:</label>
+        <label for="set">Choose type of lunch:</label>
         <select id="set" name="set" required>
-            <option value="" disabled selected>Выберите...</option>
-            <option value="set1" data-price="10">Набор 1 - $10</option>
-            <option value="set2" data-price="15">Набор 2 - $15</option>
+            <option value="" disabled selected>Choose...</option>
+            <option value="set1" data-price="13.50">Armenian Buffet - $13.50 per person (minimum of 10 people) </option>
+            <option value="set2" data-price="15">M’anoush Platter -$15.00 per person (minimum of 10 people) </option>
         </select><br>
 
         <div id="items" style="display: none;">
