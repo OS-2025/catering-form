@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ кейтеринга</title>
+</head>
+<body>
+    <h2>Форма заказа кейтеринга</h2>
+    <form id="orderForm">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="phone">Телефон:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="date">Дата мероприятия:</label>
+        <input type="date" id="date" name="date" required><br>
+
+        <label for="time">Время мероприятия:</label>
+        <input type="time" id="time" name="time" required><br>
+
+        <label for="people">Количество человек:</label>
+        <input type="number" id="people" name="people" min="1" required><br>
+
+        <label for="set">Выберите набор:</label>
+        <select id="set" name="set" required>
+            <option value="" disabled selected>Выберите...</option>
+            <option value="set1" data-price="10">Набор 1 - $10</option>
+            <option value="set2" data-price="15">Набор 2 - $15</option>
+        </select><br>
+
+        <div id="items" style="display: none;">
+            <label>Выберите позиции:</label>
+            <div id="setItems"></div>
+        </div>
+
+        <p>Итоговая сумма: <span id="totalPrice">0</span> $</p>
+        <button type="submit">Отправить заказ</button>
+    </form>
+
+    <script>
+        document.getElementById('set').addEventListener('change', function() {
+            let price = this.options[this.selectedIndex].dataset.price;
+            let people = document.getElementById('people').value || 1;
+            document.getElementById('totalPrice').textContent = price * people;
+            document.getElementById('items').style.display = 'block';
+            
+            let setItems = document.getElementById('setItems');
+            setItems.innerHTML = ''; 
+            if (this.value === 'set1') {
+                setItems.innerHTML = '<input type="checkbox" name="item" value="Сэндвич"> Сэндвич <br>' +
+                                     '<input type="checkbox" name="item" value="Сок"> Сок <br>';
+            } else if (this.value === 'set2') {
+                setItems.innerHTML = '<input type="checkbox" name="item" value="Салат"> Салат <br>' +
+                                     '<input type="checkbox" name="item" value="Кофе"> Кофе <br>';
+            }
+        });
+
+        document.getElementById('people').addEventListener('input', function() {
+            let price = document.getElementById('set').options[document.getElementById('set').selectedIndex].dataset.price || 0;
+            document.getElementById('totalPrice').textContent = price * this.value;
+        });
+    </script>
+</body>
+</html>
+Commit new file
