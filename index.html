@@ -1,63 +1,63 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catering order</title>
+    <title>Catering Order</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Catering order</h2>
+    <h2>Catering Order Form</h2>
     <form id="orderForm">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="name" required pattern="[A-Za-z\s]+" title="Only letters and spaces"><br>
 
         <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required><br>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9\-\s]{7,15}" title="Enter a valid phone number"><br>
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
 
-        <label for="date">Date:</label>
+        <label for="date">Event Date:</label>
         <input type="date" id="date" name="date" required><br>
 
-        <label for="time">Time:</label>
-        <input type="time" id="time" name="time" required><br>
+        <label for="time">Event Time:</label>
+        <input type="time" id="time" name="time" step="900" required><br>
 
-        <label for="people">People quantity:</label>
-        <input type="number" id="people" name="people" min="1" required><br>
+        <label for="people">Number of People:</label>
+        <input type="number" id="people" name="people" min="10" required><br>
 
-        <label for="set">Choose type of lunch:</label>
+        <label for="set">Select a Set:</label>
         <select id="set" name="set" required>
-            <option value="" disabled selected>Choose...</option>
-            <option value="set1" data-price="13.50">Armenian Buffet - $13.50 per person (minimum of 10 people) </option>
-            <option value="set2" data-price="15">M’anoush Platter -$15.00 per person (minimum of 10 people) </option>
+            <option value="" disabled selected>Select...</option>
+            <option value="set1" data-price="10">Set 1 - $10</option>
+            <option value="set2" data-price="15">Set 2 - $15</option>
         </select><br>
 
         <div id="items" style="display: none;">
-            <label>Выберите позиции:</label>
+            <label>Select Items:</label>
             <div id="setItems"></div>
         </div>
 
-        <p>Итоговая сумма: <span id="totalPrice">0</span> $</p>
-        <button type="submit">Отправить заказ</button>
+        <p>Total Price: <span id="totalPrice">0</span> $</p>
+        <button type="submit">Submit Order</button>
     </form>
 
     <script>
         document.getElementById('set').addEventListener('change', function() {
             let price = this.options[this.selectedIndex].dataset.price;
-            let people = document.getElementById('people').value || 1;
+            let people = document.getElementById('people').value || 10;
             document.getElementById('totalPrice').textContent = price * people;
             document.getElementById('items').style.display = 'block';
             
             let setItems = document.getElementById('setItems');
             setItems.innerHTML = ''; 
             if (this.value === 'set1') {
-                setItems.innerHTML = '<input type="checkbox" name="item" value="Сэндвич"> Сэндвич <br>' +
-                                     '<input type="checkbox" name="item" value="Сок"> Сок <br>';
+                setItems.innerHTML = '<input type="checkbox" name="item" value="Sandwich"> Sandwich <br>' +
+                                     '<input type="checkbox" name="item" value="Juice"> Juice <br>';
             } else if (this.value === 'set2') {
-                setItems.innerHTML = '<input type="checkbox" name="item" value="Салат"> Салат <br>' +
-                                     '<input type="checkbox" name="item" value="Кофе"> Кофе <br>';
+                setItems.innerHTML = '<input type="checkbox" name="item" value="Salad"> Salad <br>' +
+                                     '<input type="checkbox" name="item" value="Coffee"> Coffee <br>';
             }
         });
 
